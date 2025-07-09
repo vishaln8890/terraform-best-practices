@@ -4,6 +4,11 @@ resource "aws_instance" "instance_1" {
   tags = {
     Name = var.instance_1_name
   }
+
+  provisioner "local-exec" {
+    command = "The IP address of the server is ${self.private_ip}"
+  }
+
 }
 
 resource "aws_instance" "instance_2" {
