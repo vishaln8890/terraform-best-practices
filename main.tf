@@ -6,7 +6,7 @@ resource "aws_instance" "instance_1" {
   }
 
   provisioner "local-exec" {
-    command = "The IP address of the server is ${self.private_ip}"
+    command = "echo The IP address of the server is ${self.private_ip}"
   }
 
 }
@@ -24,3 +24,13 @@ resource "aws_instance" "instance_2" {
   }
 }
 
+module "website_s3_bucket" {
+  source = "./modules/aws-s3-static-website-bucket"
+
+  bucket_name = "vishal-terraform-practice-bucket"
+
+  tags = {
+    Terraform   = "true"
+    Environment = "test"
+  }
+}
